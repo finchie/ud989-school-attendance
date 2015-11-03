@@ -50,7 +50,7 @@ $(function() {
         });
     }
 
-    // Check boxes, based on attendace records
+    // Check boxes, based on attendance records
     $.each(attendance, function(name, days) {
         var studentRow = $('tbody .name-col:contains("' + name + '")').parent('tr'),
             dayChecks = $(studentRow).children('.attend-col').children('input');
