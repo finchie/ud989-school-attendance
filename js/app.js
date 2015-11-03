@@ -26,6 +26,58 @@
     }
 }());
 
+var model = {
+    attendance: null,
+    init: function() {
+        if (!localStorage.attendance) {
+            var students = ['Slappy the Frog', 'Lilly the Lizard', 'Paulrus the Walrus',
+                'Gregory the Goat', 'Adam the Anaconda'],
+                attendance = {};
+
+            function getRandom() {
+                return (Math.random() >= 0.5);
+            }
+
+            students.forEach(function(name) {
+                attendance[name] = [];
+
+                for (var i = 0; i <= 11; i++) {
+                    attendance[name].push(getRandom());
+                }
+            });
+
+            localStorage.attendance = JSON.stringify(attendance);
+        }
+        this.attendance = JSON.parse(localStorage.attendance);
+    }
+};
+
+var view = {
+    displayMissing: function() {
+        this.$allMissed.each(function() {
+            var studentRow = $(this).parent('tr'),
+                dayChecks = $(studentRow).children('td').children('input'),
+                numMissed = 0;
+
+            dayChecks.each(function() {
+                if (!$(this).prop('checked')) {
+                    numMissed++;
+                }
+            });
+
+            $(this).text(numMissed);
+        });
+    },
+    init: function() {
+        this.$allMissed = $('tbody .missed-col');
+        this.$allCheckboxes = $('tbody input');
+    }
+};
+
+var octopus = {
+
+};
+
 
 /* STUDENT APPLICATION */
 $(function() {
